@@ -48,9 +48,3 @@ Every day I will:
 - GitHub repository initialized
 
 
-git init
-git add .
-git commit -m "chore: setup developer environment"
-git branch -M main
-git remote add origin https://github.com/AreejAnjum/ai-engineering-portfolio.git
-git push -u origin main
