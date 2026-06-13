@@ -53,3 +53,56 @@ Every day I will:
 - [x] Day 1: Developer environment setup
 - [x] Day 2: Terminal basics
 - [x] Day 3: Git basics
+
+## Developer Command Center
+
+This repository is my daily AI Engineering learning system. It tracks my progress from beginner foundations to production-ready AI applications, including RAG, AI agents, tool calling, evaluation, LLMOps, and multi-agent systems.
+
+## Current Phase
+
+**Phase:** Project 0 - Developer Command Center
+**Week:** Week 1 - Setup, terminal, Git, VS Code, and learning system
+**Goal:** Build a clean daily workflow for learning, building, verifying, documenting, and shipping.
+
+## Week 1 Progress
+
+* [x] Day 1: Developer environment setup
+* [x] Day 2: Terminal basics
+* [x] Day 3: Git basics
+* [x] Day 4: VS Code workflow
+* [x] Day 5: Learning system
+* [x] Day 6: Mini project setup
+* [ ] Day 7: Week 1 review
+
+## Daily Score System
+
+| Area    | Points |
+| ------- | -----: |
+| Learn   |     15 |
+| Build   |     45 |
+| Verify  |     15 |
+| Ship    |     15 |
+| Reflect |     10 |
+| Total   |    100 |
+
+## Daily Workflow
+
+1. Learn one concept
+2. Build one small useful thing
+3. Verify it works
+4. Save evidence
+5. Commit and push to GitHub
+6. Write a short reflection
+
+## Proof System
+
+Every day must produce at least one type of proof:
+
+* Notes
+* Screenshots
+* Git commits
+* GitHub updates
+* Working code
+* Documentation
+* Test output
+* Demo evidence
