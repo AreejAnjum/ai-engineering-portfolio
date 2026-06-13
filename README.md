@@ -48,3 +48,8 @@ Every day I will:
 - GitHub repository initialized
 
 
+## Week 1 Progress
+
+- [x] Day 1: Developer environment setup
+- [x] Day 2: Terminal basics
+- [x] Day 3: Git basics
