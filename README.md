@@ -123,3 +123,13 @@ Week 1 proof:
 - VS Code workspace configured
 - README command center added
 - Week 1 review completed
+
+## Week 2 Progress
+
+- [x] Day 8: HTML skeleton
+- [ ] Day 9: CSS layout
+- [ ] Day 10: Forms
+- [ ] Day 11: Accessibility
+- [ ] Day 12: Deployment preview
+- [ ] Day 13: README proof
+- [ ] Day 14: Week 2 review
