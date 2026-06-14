@@ -128,7 +128,7 @@ Week 1 proof:
 - [x] Day 11: Accessibility
 - [x] Day 12: Deployment preview
 - [x] Day 13: README proof
-- [ ] Day 14: Week 2 review
+- [x] Day 14: Week 2 review
 
 ## Live Demo
 
@@ -161,3 +161,19 @@ A responsive static dashboard built with HTML and CSS to track my AI Engineering
 ### Lessons Learned
 
 This project helped me understand that a portfolio project is not only about writing code. It also needs clear documentation, screenshots, live links, and proof that the project works.
+
+## Week 2 Review
+
+In Week 2, I built Project 1: Personal Learning Dashboard.
+
+I created a semantic HTML structure, added responsive CSS, built a learning task form, improved accessibility, deployed the dashboard to Vercel, and documented the project with a live link and screenshot.
+
+Week 2 proof:
+
+- Semantic HTML dashboard created
+- Responsive CSS layout added
+- Form UI added
+- Accessibility improved
+- Live Vercel deployment completed
+- README proof added with screenshot and live link
+- Week 2 review completed
