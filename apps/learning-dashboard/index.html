@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <h1>AI Engineering Learning Dashboard</h1>
     <p>Tracking my daily progress from foundations to Agentic AI Engineering.</p>
   </header>
 
-  <main>
+  <main id="main-content">
     <section>
       <h2>Current Focus</h2>
       <p>Week 2: HTML, CSS, and Web Layout</p>
@@ -58,37 +59,47 @@
 
   <form>
     <div class="form-group">
-      <label for="task-title">Task title</label>
-      <input
-        type="text"
-        id="task-title"
-        name="task-title"
-        placeholder="Example: Practice HTML forms"
-      />
-    </div>
+  <label for="task-title">Task title <span aria-hidden="true">*</span></label>
+  <p id="task-title-help" class="help-text">Write a short title for your learning task.</p>
+  <input
+    type="text"
+    id="task-title"
+    name="task-title"
+    placeholder="Example: Practice HTML forms"
+    aria-describedby="task-title-help"
+    required
+  />
+</div>
 
-    <div class="form-group">
-      <label for="task-category">Category</label>
-      <select id="task-category" name="task-category">
-        <option value="">Choose a category</option>
-        <option value="learn">Learn</option>
-        <option value="build">Build</option>
-        <option value="verify">Verify</option>
-        <option value="ship">Ship</option>
-        <option value="reflect">Reflect</option>
-      </select>
-    </div>
+<div class="form-group">
+  <label for="task-category">Category <span aria-hidden="true">*</span></label>
+  <p id="task-category-help" class="help-text">Choose the type of task you are working on.</p>
+  <select
+    id="task-category"
+    name="task-category"
+    aria-describedby="task-category-help"
+    required
+  >
+    <option value="">Choose a category</option>
+    <option value="learn">Learn</option>
+    <option value="build">Build</option>
+    <option value="verify">Verify</option>
+    <option value="ship">Ship</option>
+    <option value="reflect">Reflect</option>
+  </select>
+</div>
 
-    <div class="form-group">
-      <label for="task-notes">Notes</label>
-      <textarea
-        id="task-notes"
-        name="task-notes"
-        rows="4"
-        placeholder="Write a short note about this task"
-      ></textarea>
-    </div>
-
+<div class="form-group">
+  <label for="task-notes">Notes</label>
+  <p id="task-notes-help" class="help-text">Add a short note about what you practiced.</p>
+  <textarea
+    id="task-notes"
+    name="task-notes"
+    rows="4"
+    placeholder="Write a short note about this task"
+    aria-describedby="task-notes-help"
+  ></textarea>
+</div>
     <button type="submit">Add Task</button>
   </form>
 </section>

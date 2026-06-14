@@ -142,3 +142,44 @@ button {
 button:hover {
   background: #1f2937;
 }
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  background: #ffffff;
+  color: #111827;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid #111827;
+}
+
+.skip-link:focus {
+  top: 16px;
+  z-index: 1000;
+}
+
+.help-text {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
