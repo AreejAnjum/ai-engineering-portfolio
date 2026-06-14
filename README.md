@@ -127,7 +127,7 @@ Week 1 proof:
 - [x] Day 10: Forms
 - [x] Day 11: Accessibility
 - [x] Day 12: Deployment preview
-- [ ] Day 13: README proof
+- [x] Day 13: README proof
 - [ ] Day 14: Week 2 review
 
 ## Live Demo
@@ -135,3 +135,29 @@ Week 1 proof:
 Personal Learning Dashboard:
 
 [Open Live Dashboard](https://ai-engineering-portfolio-wine.vercel.app/)
+
+## Project 1: Personal Learning Dashboard
+
+A responsive static dashboard built with HTML and CSS to track my AI Engineering learning progress, daily goals, and score system.
+
+### Live Demo
+
+[Open Live Dashboard](https://ai-engineering-portfolio-wine.vercel.app/)
+
+### Screenshot
+
+![Personal Learning Dashboard](docs/assets/learning-dashboard-screenshot.png)
+
+### What this project shows
+
+- Semantic HTML structure
+- Responsive CSS layout
+- Card-based dashboard design
+- Accessible form labels and focus states
+- Keyboard navigation basics
+- Deployment with Vercel
+- GitHub documentation and proof
+
+### Lessons Learned
+
+This project helped me understand that a portfolio project is not only about writing code. It also needs clear documentation, screenshots, live links, and proof that the project works.
