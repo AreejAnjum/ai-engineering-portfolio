@@ -52,6 +52,46 @@
         <li>Reflect: 10 points</li>
       </ul>
     </section>
+
+    <section>
+  <h2>Add a Learning Task</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="task-title">Task title</label>
+      <input
+        type="text"
+        id="task-title"
+        name="task-title"
+        placeholder="Example: Practice HTML forms"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="task-category">Category</label>
+      <select id="task-category" name="task-category">
+        <option value="">Choose a category</option>
+        <option value="learn">Learn</option>
+        <option value="build">Build</option>
+        <option value="verify">Verify</option>
+        <option value="ship">Ship</option>
+        <option value="reflect">Reflect</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="task-notes">Notes</label>
+      <textarea
+        id="task-notes"
+        name="task-notes"
+        rows="4"
+        placeholder="Write a short note about this task"
+      ></textarea>
+    </div>
+
+    <button type="submit">Add Task</button>
+  </form>
+</section>
   </main>
 
   <footer>

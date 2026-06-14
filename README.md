@@ -48,11 +48,7 @@ Every day I will:
 - GitHub repository initialized
 
 
-## Week 1 Progress
 
-- [x] Day 1: Developer environment setup
-- [x] Day 2: Terminal basics
-- [x] Day 3: Git basics
 
 ## Developer Command Center
 
@@ -72,7 +68,7 @@ This repository is my daily AI Engineering learning system. It tracks my progres
 * [x] Day 4: VS Code workflow
 * [x] Day 5: Learning system
 * [x] Day 6: Mini project setup
-* [ ] Day 7: Week 1 review
+* [x] Day 7: Week 1 review
 
 ## Daily Score System
 
@@ -127,11 +123,10 @@ Week 1 proof:
 ## Week 2 Progress
 
 - [x] Day 8: HTML skeleton
-- [ ] Day 9: CSS layout
-- [ ] Day 10: Forms
+- [x] Day 9: CSS layout
+- [x] Day 10: Forms
 - [ ] Day 11: Accessibility
 - [ ] Day 12: Deployment preview
 - [ ] Day 13: README proof
 - [ ] Day 14: Week 2 review
 
-- [x] Day 9: CSS layout
