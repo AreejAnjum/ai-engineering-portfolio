@@ -125,8 +125,13 @@ Week 1 proof:
 - [x] Day 8: HTML skeleton
 - [x] Day 9: CSS layout
 - [x] Day 10: Forms
-- [ ] Day 11: Accessibility
-- [ ] Day 12: Deployment preview
+- [x] Day 11: Accessibility
+- [x] Day 12: Deployment preview
 - [ ] Day 13: README proof
 - [ ] Day 14: Week 2 review
 
+## Live Demo
+
+Personal Learning Dashboard:
+
+[Open Live Dashboard](https://ai-engineering-portfolio-wine.vercel.app/)
