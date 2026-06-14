@@ -133,3 +133,5 @@ Week 1 proof:
 - [ ] Day 12: Deployment preview
 - [ ] Day 13: README proof
 - [ ] Day 14: Week 2 review
+
+- [x] Day 9: CSS layout
