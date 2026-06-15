@@ -182,7 +182,7 @@ Week 2 proof:
 
 - [x] Day 15: Foundation map
 - [x] Day 16: Core JavaScript concept 1
-- [ ] Day 17: Core JavaScript concept 2
+- [x] Day 17: Core JavaScript concept 2
 - [ ] Day 18: Integration day
 - [ ] Day 19: Quality day
 - [ ] Day 20: Proof day

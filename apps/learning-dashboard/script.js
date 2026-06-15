@@ -14,11 +14,25 @@ const learningTasks = [
     category: "Verify",
     status: "Todo",
   },
+  {
+    title: "",
+    category: "Build",
+    status: "Blocked",
+  },
 ];
 
+const validStatuses = ["Done", "In progress", "Todo"];
 const taskListElement = document.querySelector("#task-list");
 
-learningTasks.forEach((task) => {
+function isValidTask(task) {
+  return (
+    task.title &&
+    task.category &&
+    validStatuses.includes(task.status)
+  );
+}
+
+function createTaskCard(task) {
   const taskCard = document.createElement("article");
   taskCard.className = "task-card";
 
@@ -28,5 +42,25 @@ learningTasks.forEach((task) => {
     <p><strong>Status:</strong> ${task.status}</p>
   `;
 
-  taskListElement.appendChild(taskCard);
-});
+  return taskCard;
+}
+
+function renderTasks(tasks) {
+  taskListElement.innerHTML = "";
+
+  const validTasks = tasks.filter(isValidTask);
+
+  validTasks.forEach((task) => {
+    const taskCard = createTaskCard(task);
+    taskListElement.appendChild(taskCard);
+  });
+
+  if (validTasks.length !== tasks.length) {
+    const warning = document.createElement("p");
+    warning.className = "validation-warning";
+    warning.textContent = "Some invalid task data was skipped.";
+    taskListElement.appendChild(warning);
+  }
+}
+
+renderTasks(learningTasks);

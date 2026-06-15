@@ -199,3 +199,11 @@ textarea:focus-visible {
 .task-card h3 {
   margin-top: 0;
 }
+.validation-warning {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-weight: 700;
+}
