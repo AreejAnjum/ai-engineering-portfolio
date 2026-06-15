@@ -183,3 +183,19 @@ textarea:focus-visible {
   outline: 3px solid #2563eb;
   outline-offset: 3px;
 }
+
+.task-list {
+  display: grid;
+  gap: 16px;
+}
+
+.task-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.task-card h3 {
+  margin-top: 0;
+}
