@@ -57,7 +57,7 @@
     <section>
   <h2>Add a Learning Task</h2>
 
-  <form>
+  <form id="task-form">
     <div class="form-group">
   <label for="task-title">Task title <span aria-hidden="true">*</span></label>
   <p id="task-title-help" class="help-text">Write a short title for your learning task.</p>
@@ -106,7 +106,7 @@
 <section>
   <h2>JavaScript Task Preview</h2>
   <p>These tasks are rendered from JavaScript data.</p>
-  <div id="task-list" class="task-list"></div>
+<div id="task-list" class="task-list" aria-live="polite"></div>
 </section>
   </main>
 
