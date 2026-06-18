@@ -184,6 +184,6 @@ Week 2 proof:
 - [x] Day 16: Core JavaScript concept 1
 - [x] Day 17: Core JavaScript concept 2
 - [x] Day 18: Integration day
-- [ ] Day 19: Quality day
+- [x] Day 19: Quality day
 - [ ] Day 20: Proof day
 - [ ] Day 21: Review day

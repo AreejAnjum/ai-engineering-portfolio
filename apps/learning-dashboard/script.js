@@ -20,12 +20,15 @@ const learningTasks = [
 ];
 
 const validStatuses = ["Done", "In progress", "Todo"];
+const maxTitleLength = 80;
+const maxNotesLength = 200;
 
 const taskFormElement = document.querySelector("#task-form");
 const taskTitleInput = document.querySelector("#task-title");
 const taskCategoryInput = document.querySelector("#task-category");
 const taskNotesInput = document.querySelector("#task-notes");
 const taskListElement = document.querySelector("#task-list");
+const formErrorElement = document.querySelector("#form-error");
 
 const categoryLabels = {
   learn: "Learn",
@@ -39,8 +42,41 @@ function isValidTask(task) {
   return Boolean(
     task.title.trim() &&
       task.category.trim() &&
-      validStatuses.includes(task.status),
+      validStatuses.includes(task.status) &&
+      task.title.length <= maxTitleLength &&
+      task.notes.length <= maxNotesLength,
   );
+}
+
+function getValidationMessage(task) {
+  if (!task.title.trim()) {
+    return "Please write a task title.";
+  }
+
+  if (!task.category.trim()) {
+    return "Please choose a task category.";
+  }
+
+  if (task.title.length > maxTitleLength) {
+    return `Task title must be ${maxTitleLength} characters or less.`;
+  }
+
+  if (task.notes.length > maxNotesLength) {
+    return `Notes must be ${maxNotesLength} characters or less.`;
+  }
+
+  return "";
+}
+
+function createMetaLine(label, value) {
+  const line = document.createElement("p");
+  const strong = document.createElement("strong");
+
+  strong.textContent = `${label}: `;
+  line.appendChild(strong);
+  line.append(value);
+
+  return line;
 }
 
 function createTaskCard(task) {
@@ -50,11 +86,8 @@ function createTaskCard(task) {
   const title = document.createElement("h3");
   title.textContent = task.title;
 
-  const category = document.createElement("p");
-  category.innerHTML = `<strong>Category:</strong> ${task.category}`;
-
-  const status = document.createElement("p");
-  status.innerHTML = `<strong>Status:</strong> ${task.status}`;
+  const category = createMetaLine("Category", task.category);
+  const status = createMetaLine("Status", task.status);
 
   taskCard.appendChild(title);
   taskCard.appendChild(category);
@@ -74,17 +107,20 @@ function renderTasks(tasks) {
 
   const validTasks = tasks.filter(isValidTask);
 
+  if (validTasks.length === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "empty-state";
+    emptyMessage.textContent = "No valid tasks to show yet.";
+    taskListElement.appendChild(emptyMessage);
+    return;
+  }
+
   validTasks.forEach((task) => {
     const taskCard = createTaskCard(task);
     taskListElement.appendChild(taskCard);
   });
 
-  if (validTasks.length !== tasks.length) {
-    const warning = document.createElement("p");
-    warning.className = "validation-warning";
-    warning.textContent = "Some invalid task data was skipped.";
-    taskListElement.appendChild(warning);
-  }
+  console.info(`Rendered ${validTasks.length} valid tasks.`);
 }
 
 taskFormElement.addEventListener("submit", (event) => {
@@ -97,15 +133,22 @@ taskFormElement.addEventListener("submit", (event) => {
     notes: taskNotesInput.value.trim(),
   };
 
-  if (!isValidTask(newTask)) {
+  const validationMessage = getValidationMessage(newTask);
+
+  if (validationMessage) {
+    formErrorElement.textContent = validationMessage;
     taskTitleInput.focus();
+    console.warn("Task validation failed:", validationMessage);
     return;
   }
 
+  formErrorElement.textContent = "";
   learningTasks.push(newTask);
   renderTasks(learningTasks);
   taskFormElement.reset();
   taskTitleInput.focus();
+
+  console.info("Task added successfully:", newTask.title);
 });
 
 renderTasks(learningTasks);
