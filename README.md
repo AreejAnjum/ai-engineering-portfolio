@@ -222,3 +222,6 @@ I learned how JavaScript connects to HTML, stores task data in arrays and object
 - Proof documented in `docs/week-03-proof.md`
 - Evidence saved in `docs/evidence/week-03/`
 - Week 3 review completed
+
+
+- [x] Day 23: Core concept 1

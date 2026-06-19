@@ -1,3 +1,32 @@
+// @ts-check
+
+/**
+ * @typedef {"Learn" | "Build" | "Verify" | "Ship" | "Reflect"} TaskCategory
+ * @typedef {"Done" | "In progress" | "Todo"} TaskStatus
+ *
+ * @typedef {Object} LearningTask
+ * @property {string} title
+ * @property {TaskCategory} category
+ * @property {TaskStatus} status
+ * @property {string} notes
+ */
+
+/** @type {TaskStatus[]} */
+const validStatuses = ["Done", "In progress", "Todo"];
+
+/** @type {Record<string, TaskCategory>} */
+const categoryLabels = {
+  learn: "Learn",
+  build: "Build",
+  verify: "Verify",
+  ship: "Ship",
+  reflect: "Reflect",
+};
+
+const maxTitleLength = 80;
+const maxNotesLength = 200;
+
+/** @type {LearningTask[]} */
 const learningTasks = [
   {
     title: "Practice JavaScript variables",
@@ -19,10 +48,6 @@ const learningTasks = [
   },
 ];
 
-const validStatuses = ["Done", "In progress", "Todo"];
-const maxTitleLength = 80;
-const maxNotesLength = 200;
-
 const taskFormElement = document.querySelector("#task-form");
 const taskTitleInput = document.querySelector("#task-title");
 const taskCategoryInput = document.querySelector("#task-category");
@@ -30,14 +55,29 @@ const taskNotesInput = document.querySelector("#task-notes");
 const taskListElement = document.querySelector("#task-list");
 const formErrorElement = document.querySelector("#form-error");
 
-const categoryLabels = {
-  learn: "Learn",
-  build: "Build",
-  verify: "Verify",
-  ship: "Ship",
-  reflect: "Reflect",
-};
+if (
+  !(taskFormElement instanceof HTMLFormElement) ||
+  !(taskTitleInput instanceof HTMLInputElement) ||
+  !(taskCategoryInput instanceof HTMLSelectElement) ||
+  !(taskNotesInput instanceof HTMLTextAreaElement) ||
+  !(taskListElement instanceof HTMLElement) ||
+  !(formErrorElement instanceof HTMLElement)
+) {
+  throw new Error("Required dashboard elements are missing.");
+}
 
+/**
+ * @param {string} value
+ * @returns {TaskCategory | ""}
+ */
+function getCategoryLabel(value) {
+  return categoryLabels[value] || "";
+}
+
+/**
+ * @param {LearningTask} task
+ * @returns {boolean}
+ */
 function isValidTask(task) {
   return Boolean(
     task.title.trim() &&
@@ -48,6 +88,10 @@ function isValidTask(task) {
   );
 }
 
+/**
+ * @param {LearningTask} task
+ * @returns {string}
+ */
 function getValidationMessage(task) {
   if (!task.title.trim()) {
     return "Please write a task title.";
@@ -68,6 +112,11 @@ function getValidationMessage(task) {
   return "";
 }
 
+/**
+ * @param {string} label
+ * @param {string} value
+ * @returns {HTMLParagraphElement}
+ */
 function createMetaLine(label, value) {
   const line = document.createElement("p");
   const strong = document.createElement("strong");
@@ -79,6 +128,10 @@ function createMetaLine(label, value) {
   return line;
 }
 
+/**
+ * @param {LearningTask} task
+ * @returns {HTMLElement}
+ */
 function createTaskCard(task) {
   const taskCard = document.createElement("article");
   taskCard.className = "task-card";
@@ -102,6 +155,10 @@ function createTaskCard(task) {
   return taskCard;
 }
 
+/**
+ * @param {LearningTask[]} tasks
+ * @returns {void}
+ */
 function renderTasks(tasks) {
   taskListElement.innerHTML = "";
 
@@ -126,9 +183,10 @@ function renderTasks(tasks) {
 taskFormElement.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  /** @type {LearningTask} */
   const newTask = {
     title: taskTitleInput.value.trim(),
-    category: categoryLabels[taskCategoryInput.value] || "",
+    category: getCategoryLabel(taskCategoryInput.value),
     status: "Todo",
     notes: taskNotesInput.value.trim(),
   };
