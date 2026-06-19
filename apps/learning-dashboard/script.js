@@ -14,7 +14,6 @@
 /** @type {TaskStatus[]} */
 const validStatuses = ["Done", "In progress", "Todo"];
 
-/** @type {Record<string, TaskCategory>} */
 const categoryLabels = {
   learn: "Learn",
   build: "Build",
@@ -208,5 +207,50 @@ taskFormElement.addEventListener("submit", (event) => {
 
   console.info("Task added successfully:", newTask.title);
 });
+
+/**
+ * @returns {void}
+ */
+function runValidationChecks() {
+  /** @type {LearningTask[]} */
+  const testTasks = [
+    {
+      title: "Valid task",
+      category: "Learn",
+      status: "Todo",
+      notes: "This task should pass validation.",
+    },
+    {
+      title: "",
+      category: "Build",
+      status: "Todo",
+      notes: "Missing title should fail.",
+    },
+    {
+      title: "Missing category",
+      category: "",
+      status: "Todo",
+      notes: "Missing category should fail.",
+    },
+    {
+      title: "Invalid status",
+      category: "Verify",
+      status: "Blocked",
+      notes: "Invalid status should fail.",
+    },
+  ];
+
+  console.info("Running task validation checks...");
+
+  testTasks.forEach((task) => {
+    console.info({
+      title: task.title || "Missing title",
+      isValid: isValidTask(task),
+      message: getValidationMessage(task),
+    });
+  });
+}
+
+runValidationChecks();
 
 renderTasks(learningTasks);

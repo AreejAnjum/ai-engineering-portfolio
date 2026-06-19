@@ -224,4 +224,6 @@ I learned how JavaScript connects to HTML, stores task data in arrays and object
 - Week 3 review completed
 
 
+
 - [x] Day 23: Core concept 1
+- [x] Day 24: Core concept 2- [x] Day 24: Core concept 2
