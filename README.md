@@ -185,5 +185,22 @@ Week 2 proof:
 - [x] Day 17: Core JavaScript concept 2
 - [x] Day 18: Integration day
 - [x] Day 19: Quality day
-- [ ] Day 20: Proof day
+- [x] Day 20: Proof day
 - [ ] Day 21: Review day
+## Week 3 JavaScript Proof
+
+In Week 3, I upgraded the Personal Learning Dashboard with JavaScript interactivity.
+
+Proof added:
+
+- JavaScript task rendering
+- Form submission handling
+- Input validation
+- Error messages
+- Console logs
+- Success and failure path testing
+
+Evidence:
+
+- `docs/week-03-proof.md`
+- `docs/evidence/week-03/day-06/`
