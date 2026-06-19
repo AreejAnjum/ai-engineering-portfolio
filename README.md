@@ -186,7 +186,7 @@ Week 2 proof:
 - [x] Day 18: Integration day
 - [x] Day 19: Quality day
 - [x] Day 20: Proof day
-- [ ] Day 21: Review day
+- [x] Day 21: Review day
 ## Week 3 JavaScript Proof
 
 In Week 3, I upgraded the Personal Learning Dashboard with JavaScript interactivity.
@@ -204,3 +204,21 @@ Evidence:
 
 - `docs/week-03-proof.md`
 - `docs/evidence/week-03/day-06/`
+
+## Week 3 Review
+
+In Week 3, I upgraded the Personal Learning Dashboard with JavaScript fundamentals.
+
+I learned how JavaScript connects to HTML, stores task data in arrays and objects, renders tasks into the DOM, handles form submission, validates user input, shows error messages, and logs success/failure paths.
+
+## Week 3 proof:
+
+- JavaScript file added: `apps/learning-dashboard/script.js`
+- Task data rendered from arrays and objects
+- Form connected to JavaScript
+- Valid task submission works
+- Invalid input shows clear error messages
+- Safe rendering improved with `textContent`
+- Proof documented in `docs/week-03-proof.md`
+- Evidence saved in `docs/evidence/week-03/`
+- Week 3 review completed
