@@ -223,7 +223,34 @@ I learned how JavaScript connects to HTML, stores task data in arrays and object
 - Evidence saved in `docs/evidence/week-03/`
 - Week 3 review completed
 
+## Week 4 Progress
 
+* [x] Day 22: Foundation map
+* [x] Day 23: Core concept 1
+* [x] Day 24: Core concept 2
+* [x] Day 25: Integration day
+* [ ] Day 26: Quality day
+* [ ] Day 27: Proof day
+* [ ] Day 28: Review day
 
-- [x] Day 23: Core concept 1
-- [x] Day 24: Core concept 2- [x] Day 24: Core concept 2
+## Week 4 TypeScript and Clean Code Proof
+
+In Week 4, I started improving the Personal Learning Dashboard with TypeScript-style thinking and cleaner JavaScript structure.
+
+Proof added so far:
+
+* TypeScript-style task data contracts with JSDoc
+* `// @ts-check` added for stricter JavaScript checking
+* Clear `LearningTask`, `TaskCategory`, and `TaskStatus` definitions
+* Safer HTML element selection with `getRequiredElement`
+* Validation test cases for valid and invalid tasks
+* Cleaner function groups for form reading, validation, rendering, error handling, and initialization
+
+Evidence:
+
+* `docs/week-04-plan.md`
+* `docs/week-04-validation-tests.md`
+* `docs/week-04-clean-code-flow.md`
+* `docs/evidence/week-04/`
+
+Day 25 refactored the dashboard JavaScript into cleaner function groups while keeping the full form-to-task flow working.
