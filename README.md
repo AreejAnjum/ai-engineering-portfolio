@@ -210,8 +210,8 @@ Week 3 completed Project 1’s first interactive upgrade.
 * [x] Day 24: Core concept 2
 * [x] Day 25: Integration day
 * [x] Day 26: Quality day
-* [ ] Day 27: Proof day
-* [ ] Day 28: Review day
+* [x] Day 27: Proof day
+* [x] Day 28: Review day
 
 ## Week 4 Goal
 
@@ -288,3 +288,6 @@ Manual quality checks completed:
 ## Week 4 Lessons Learned
 
 Week 4 showed me that clean code is not only about making a feature work. A professional feature should have clear data structure, validation, safer DOM handling, useful errors, accessibility signals, and evidence that both success and failure paths were tested.
+
+
+Day 28 completed the Week 4 review, final manual checks, README cleanup, and `week-04-done` Git tag.

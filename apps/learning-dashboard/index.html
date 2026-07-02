@@ -67,6 +67,8 @@
     name="task-title"
     placeholder="Example: Practice HTML forms"
     aria-describedby="task-title-help"
+      maxlength="80"
+  aria-invalid="false"
     required
   />
 </div>
@@ -78,6 +80,7 @@
     id="task-category"
     name="task-category"
     aria-describedby="task-category-help"
+    aria-invalid="false"
     required
   >
     <option value="">Choose a category</option>
@@ -98,10 +101,12 @@
     rows="4"
     placeholder="Write a short note about this task"
     aria-describedby="task-notes-help"
+    maxlength="200"
+aria-invalid="false"
   ></textarea>
 </div>
     <button type="submit">Add Task</button>
-    <p id="form-error" class="form-error" aria-live="polite"></p>
+   <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
   </form>
 </section>
 <section>

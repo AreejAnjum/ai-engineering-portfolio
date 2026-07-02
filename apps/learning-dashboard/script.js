@@ -9,11 +9,36 @@
  * @property {TaskCategory} category
  * @property {TaskStatus} status
  * @property {string} notes
+ *
+ * @typedef {Object} TaskDraft
+ * @property {string} title
+ * @property {TaskCategory | ""} category
+ * @property {TaskStatus} status
+ * @property {string} notes
  */
+
+/**
+ * Finds an HTML element and checks that it is the correct type.
+ *
+ * @template {Element} T
+ * @param {string} selector
+ * @param {{ new (): T }} elementType
+ * @returns {T}
+ */
+function getRequiredElement(selector, elementType) {
+  const element = document.querySelector(selector);
+
+  if (!(element instanceof elementType)) {
+    throw new Error(`Required element is missing or invalid: ${selector}`);
+  }
+
+  return element;
+}
 
 /** @type {TaskStatus[]} */
 const validStatuses = ["Done", "In progress", "Todo"];
 
+/** @type {Record<string, TaskCategory>} */
 const categoryLabels = {
   learn: "Learn",
   build: "Build",
@@ -47,23 +72,15 @@ const learningTasks = [
   },
 ];
 
-const taskFormElement = document.querySelector("#task-form");
-const taskTitleInput = document.querySelector("#task-title");
-const taskCategoryInput = document.querySelector("#task-category");
-const taskNotesInput = document.querySelector("#task-notes");
-const taskListElement = document.querySelector("#task-list");
-const formErrorElement = document.querySelector("#form-error");
-
-if (
-  !(taskFormElement instanceof HTMLFormElement) ||
-  !(taskTitleInput instanceof HTMLInputElement) ||
-  !(taskCategoryInput instanceof HTMLSelectElement) ||
-  !(taskNotesInput instanceof HTMLTextAreaElement) ||
-  !(taskListElement instanceof HTMLElement) ||
-  !(formErrorElement instanceof HTMLElement)
-) {
-  throw new Error("Required dashboard elements are missing.");
-}
+const taskFormElement = getRequiredElement("#task-form", HTMLFormElement);
+const taskTitleInput = getRequiredElement("#task-title", HTMLInputElement);
+const taskCategoryInput = getRequiredElement(
+  "#task-category",
+  HTMLSelectElement,
+);
+const taskNotesInput = getRequiredElement("#task-notes", HTMLTextAreaElement);
+const taskListElement = getRequiredElement("#task-list", HTMLElement);
+const formErrorElement = getRequiredElement("#form-error", HTMLElement);
 
 /**
  * @param {string} value
@@ -74,21 +91,21 @@ function getCategoryLabel(value) {
 }
 
 /**
- * @param {LearningTask} task
+ * @param {TaskDraft} task
  * @returns {boolean}
  */
 function isValidTask(task) {
   return Boolean(
     task.title.trim() &&
-      task.category.trim() &&
-      validStatuses.includes(task.status) &&
-      task.title.length <= maxTitleLength &&
-      task.notes.length <= maxNotesLength,
+    task.category.trim() &&
+    validStatuses.includes(task.status) &&
+    task.title.length <= maxTitleLength &&
+    task.notes.length <= maxNotesLength,
   );
 }
 
 /**
- * @param {LearningTask} task
+ * @param {TaskDraft} task
  * @returns {string}
  */
 function getValidationMessage(task) {
@@ -100,6 +117,10 @@ function getValidationMessage(task) {
     return "Please choose a task category.";
   }
 
+  if (!validStatuses.includes(task.status)) {
+    return "Task status is invalid.";
+  }
+
   if (task.title.length > maxTitleLength) {
     return `Task title must be ${maxTitleLength} characters or less.`;
   }
@@ -109,6 +130,96 @@ function getValidationMessage(task) {
   }
 
   return "";
+}
+
+/**
+ * @returns {TaskDraft}
+ */
+function getTaskFromForm() {
+  return {
+    title: taskTitleInput.value.trim(),
+    category: getCategoryLabel(taskCategoryInput.value),
+    status: "Todo",
+    notes: taskNotesInput.value.trim(),
+  };
+}
+
+/**
+ * Converts a draft task into a valid learning task.
+ *
+ * @param {TaskDraft} task
+ * @returns {LearningTask | null}
+ */
+function toLearningTask(task) {
+  const validationMessage = getValidationMessage(task);
+
+  if (validationMessage) {
+    return null;
+  }
+
+  return {
+    title: task.title.trim(),
+    category: /** @type {TaskCategory} */ (task.category),
+    status: task.status,
+    notes: task.notes.trim(),
+  };
+}
+
+/**
+ * @param {string} message
+ * @returns {void}
+ */
+
+/**
+ * @param {boolean} isInvalid
+ * @returns {void}
+ */
+function setFormInvalidState(isInvalid) {
+  taskTitleInput.setAttribute("aria-invalid", String(isInvalid));
+  taskCategoryInput.setAttribute("aria-invalid", String(isInvalid));
+  taskNotesInput.setAttribute("aria-invalid", String(isInvalid));
+}
+
+/**
+ * @param {LearningTask | TaskDraft} task
+ * @returns {void}
+ */
+function focusFirstInvalidField(task) {
+  if (!task.title.trim() || task.title.length > maxTitleLength) {
+    taskTitleInput.focus();
+    return;
+  }
+
+  if (!task.category.trim()) {
+    taskCategoryInput.focus();
+    return;
+  }
+
+  if (task.notes.length > maxNotesLength) {
+    taskNotesInput.focus();
+    return;
+  }
+
+  taskTitleInput.focus();
+}
+
+/**
+ * @param {string} message
+ * @returns {void}
+ */
+function showFormError(message) {
+  setFormInvalidState(true);
+  formErrorElement.textContent = message;
+}
+/**
+ * @returns {void}
+ */
+/**
+ * @returns {void}
+ */
+function clearFormError() {
+  setFormInvalidState(false);
+  formErrorElement.textContent = "";
 }
 
 /**
@@ -155,6 +266,17 @@ function createTaskCard(task) {
 }
 
 /**
+ * @returns {HTMLParagraphElement}
+ */
+function createEmptyState() {
+  const emptyMessage = document.createElement("p");
+  emptyMessage.className = "empty-state";
+  emptyMessage.textContent = "No valid tasks to show yet.";
+
+  return emptyMessage;
+}
+
+/**
  * @param {LearningTask[]} tasks
  * @returns {void}
  */
@@ -164,93 +286,72 @@ function renderTasks(tasks) {
   const validTasks = tasks.filter(isValidTask);
 
   if (validTasks.length === 0) {
-    const emptyMessage = document.createElement("p");
-    emptyMessage.className = "empty-state";
-    emptyMessage.textContent = "No valid tasks to show yet.";
-    taskListElement.appendChild(emptyMessage);
+    taskListElement.appendChild(createEmptyState());
     return;
   }
 
   validTasks.forEach((task) => {
-    const taskCard = createTaskCard(task);
-    taskListElement.appendChild(taskCard);
+    taskListElement.appendChild(createTaskCard(task));
   });
 
   console.info(`Rendered ${validTasks.length} valid tasks.`);
 }
 
-taskFormElement.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  /** @type {LearningTask} */
-  const newTask = {
-    title: taskTitleInput.value.trim(),
-    category: getCategoryLabel(taskCategoryInput.value),
-    status: "Todo",
-    notes: taskNotesInput.value.trim(),
-  };
-
-  const validationMessage = getValidationMessage(newTask);
-
-  if (validationMessage) {
-    formErrorElement.textContent = validationMessage;
-    taskTitleInput.focus();
-    console.warn("Task validation failed:", validationMessage);
-    return;
-  }
-
-  formErrorElement.textContent = "";
-  learningTasks.push(newTask);
+/**
+ * @param {LearningTask} task
+ * @returns {void}
+ */
+function addTask(task) {
+  learningTasks.push(task);
   renderTasks(learningTasks);
-  taskFormElement.reset();
-  taskTitleInput.focus();
-
-  console.info("Task added successfully:", newTask.title);
-});
+}
 
 /**
  * @returns {void}
  */
-function runValidationChecks() {
-  /** @type {LearningTask[]} */
-  const testTasks = [
-    {
-      title: "Valid task",
-      category: "Learn",
-      status: "Todo",
-      notes: "This task should pass validation.",
-    },
-    {
-      title: "",
-      category: "Build",
-      status: "Todo",
-      notes: "Missing title should fail.",
-    },
-    {
-      title: "Missing category",
-      category: "",
-      status: "Todo",
-      notes: "Missing category should fail.",
-    },
-    {
-      title: "Invalid status",
-      category: "Verify",
-      status: "Blocked",
-      notes: "Invalid status should fail.",
-    },
-  ];
-
-  console.info("Running task validation checks...");
-
-  testTasks.forEach((task) => {
-    console.info({
-      title: task.title || "Missing title",
-      isValid: isValidTask(task),
-      message: getValidationMessage(task),
-    });
-  });
+function resetTaskForm() {
+  taskFormElement.reset();
+  taskTitleInput.focus();
 }
 
-runValidationChecks();
+/**
+ * @param {Event} event
+ * @returns {void}
+ */
+function handleTaskSubmit(event) {
+  event.preventDefault();
 
-renderTasks(learningTasks);
+  const taskDraft = getTaskFromForm();
+  const validationMessage = getValidationMessage(taskDraft);
+
+  if (validationMessage) {
+  showFormError(validationMessage);
+  focusFirstInvalidField(taskDraft);
+  console.warn("Task validation failed:", validationMessage);
+  return;
+}
+
+  const validTask = toLearningTask(taskDraft);
+
+  if (!validTask) {
+    showFormError("Task could not be created.");
+    return;
+  }
+
+  clearFormError();
+  addTask(validTask);
+  resetTaskForm();
+
+  console.info("Task added successfully:", validTask.title);
+}
+
+/**
+ * @returns {void}
+ */
+function initDashboard() {
+  taskFormElement.addEventListener("submit", handleTaskSubmit);
+  renderTasks(learningTasks);
+  console.info("Learning dashboard initialized.");
+}
+
+initDashboard();
